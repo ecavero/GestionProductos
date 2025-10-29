@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuevo Producto</title>
+</head>
+<body>
+    <h1>Registrar Nuevo Producto</h1>
+    <form th:action="@{/productos}" th:object="${producto}" method="post">
+        <label>Código:</label>
+        <input type="text" th:field="*{codigo}" />
+        <span th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></span>
+        
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" />
+        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+        <label>Descripción:</label>
+        <input type="text" th:field="*{descripcion}" />
+        
+        <label>Precio:</label>
+        <input type="number" th:field="*{precio}" step="0.01" />
+        <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></span>
+        <label>Stock:</label>
+        <input type="number" th:field="*{stock}" />
+        <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="/productos">Cancelar</a>
+</body>
+</html>
+
