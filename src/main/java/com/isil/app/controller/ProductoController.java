@@ -15,10 +15,18 @@ public class ProductoController {
 
    @Autowired
    ProductoRepository productoRepository;
+
    @GetMapping("/productos")
    String listarProductos(Model model) {
      List<Producto> productos = productoRepository.findAll();
      model.addAttribute("productos", productos);
      return "index";
+   }
+
+   @GetMapping("/productos/nuevo")
+   String nuevoProducto(Model model) {
+      Producto producto = new Producto();
+      model.addAttribute("producto", producto);
+      return "nuevo";
    }
 }
