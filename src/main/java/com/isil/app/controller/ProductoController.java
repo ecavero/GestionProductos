@@ -6,9 +6,12 @@ import com.isil.app.respository.ProductoRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +39,12 @@ public class ProductoController {
    }
 
    @PostMapping
-   String nuevoProducto(Model model, Producto producto) {
-      productoRepository.save(producto);
+   String nuevoProducto(Model model, @Valid Producto producto, BindingResult result) {
+       if (result.hasErrors()) {
+           // Si hay errores, se vuelve a mostrar el formulario
+           return "nuevo";
+       }
+       productoRepository.save(producto);
       return "redirect:/productos";
    }
 
@@ -50,8 +57,11 @@ public class ProductoController {
    }
 
    @PostMapping("/actualizar")
-   String actualizarProducto(Model model, Producto producto) {
-      productoRepository.save(producto);
+   String actualizarProducto(Model model, @Valid Producto producto, BindingResult result) {
+       if (result.hasErrors()) {
+           return "editar";
+       }
+       productoRepository.save(producto);
       return "redirect:/productos";
    }
 }
