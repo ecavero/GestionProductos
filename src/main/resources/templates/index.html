@@ -1,35 +1,83 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lista de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
-    <h1>Productos</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Stock</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="producto : ${productos}">
-                <td th:text="${producto.codigo}"></td>
-                <td th:text="${producto.nombre}"></td>
-                <td th:text="${producto.descripcion}"></td>
-                <td th:text="${producto.precio}"></td>
-                <td th:text="${producto.stock}"></td>
-                <td>
-                    <a th:href="@{/productos/editar/{id}(id=${producto.id})}">Editar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="/productos/nuevo">Nuevo Producto</a>
+<body class="bg-light">
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+                <div class="container">
+                <a class="navbar-brand fw-bold d-flex align-items-center"  href="#">
+                    <i class="bi bi-box-seam me-2"></i>Gestión de Productos
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="container py-5">
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+                <div>
+                    <h2 class="fw-semibold text-dark mb-0">Listado de Productos</h2>
+                </div>
+                <div class="text-end">
+                    <a href="/productos/nuevo" class="btn btn-primary d-flex align-items-center">Agregar producto</a>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered align-middle text-center mb-0">
+                            <thead class="table-primary text-uppercase small">
+                            <tr>
+                                <th scope="col" class="text-uppercase small">#</th>
+                                <th scope="col" class="text-uppercase small">CODIGO</th>
+                                <th scope="col" class="text-uppercase small">NOMBRE</th>
+                                <th scope="col" class="text-uppercase small">DESCRIPCION</th>
+                                <th scope="col" class="text-uppercase small">PRECIO</th>
+                                <th scope="col" class="text-uppercase small">STOCK</th>
+                                <th scope="col" class="text-uppercase small">ACCIONES</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="producto : ${productos}">
+                                <td th:text="${producto.id}"></td>
+                                <td th:text="${producto.codigo}"></td>
+                                <td th:text="${producto.nombre}"></td>
+                                <td th:text="${producto.descripcion}"></td>
+                                <td th:text="${producto.precio}"></td>
+                                <td th:text="${producto.stock}"></td>
+                                <td>
+                                    <a th:href="@{/productos/editar/{id}(id=${producto.id})}" class="btn btn-success btn-sm" title="Editar">
+                                        <ion-icon name="create-outline" ></ion-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- MENSAJE SI NO HAY DATOS -->
+                    <div th:if="${#lists.isEmpty(productos)}" class="text-center py-5 text-muted">
+                        <i class="bi bi-person-x fs-1 d-block mb-3"></i>
+                        <p class="fs-5 mb-0">No hay productos registrados actualmente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>
 
