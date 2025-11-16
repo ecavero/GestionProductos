@@ -28,21 +28,21 @@ public class ProductoController {
    String listarProductos(Model model) {
      List<Producto> productos = productoRepository.findAll();
      model.addAttribute("productos", productos);
-     return "index";
+     return "productos/index";
    }
 
    @GetMapping("/nuevo")
    String nuevoProducto(Model model) {
       Producto producto = new Producto();
       model.addAttribute("producto", producto);
-      return "nuevo";
+      return "productos/nuevo";
    }
 
    @PostMapping
    String nuevoProducto(Model model, @Valid Producto producto, BindingResult result) {
        if (result.hasErrors()) {
            // Si hay errores, se vuelve a mostrar el formulario
-           return "nuevo";
+           return "productos/nuevo";
        }
        productoRepository.save(producto);
       return "redirect:/productos";
@@ -53,13 +53,13 @@ public class ProductoController {
       Producto producto = productoRepository.findById(id)
          .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
       model.addAttribute("producto", producto);
-      return "editar";
+      return "productos/editar";
    }
 
    @PostMapping("/actualizar")
    String actualizarProducto(Model model, @Valid Producto producto, BindingResult result) {
        if (result.hasErrors()) {
-           return "editar";
+           return "productos/editar";
        }
        productoRepository.save(producto);
       return "redirect:/productos";
