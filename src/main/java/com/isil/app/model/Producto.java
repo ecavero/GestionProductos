@@ -17,23 +17,23 @@ public class Producto {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @NotBlank(message = "El código es obligatorio")
+   @NotBlank()
    @Column(unique = true, nullable = false)
    private String codigo;
 
    @Column(nullable = false)
-   @NotBlank(message = "El nombre es obligatorio")
+   @NotBlank()
    private String nombre;
 
    private String descripcion;
 
    @Column(nullable = false)
-   @NotNull(message = "El precio es obligatorio")
-   @DecimalMin(value = "0.0", inclusive = true, message = "El precio debe ser mayor o igual a 0")
+   @NotNull()
+   @Min(0)
    private Double precio;
 
-   @NotNull(message = "El stock es obligatorio")
-   @Min(value = 0, message = "El stock no puede ser negativo")
+   @NotNull()
+   @Min(0)
    @Column(nullable = false)
    private Integer stock;
 }
