@@ -66,11 +66,16 @@
                                 <td th:text="${producto.precio}"></td>
                                 <td th:text="${producto.stock}"></td>
                                 <td>
-                                    <a th:href="@{/productos/editar/{id}(id=${producto.id})}" class="btn btn-success btn-sm"
-                                       title="Editar">
+                                    <a th:href="@{/productos/editar/{id}(id=${producto.id})}" class="btn btn-success btn-sm" title="Editar">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </a>
+                                    <form th:action="@{/productos/eliminar/{id}(id=${producto.id})}" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </button>
+                                    </form>
                                 </td>
+
                             </tr>
                             </tbody>
                         </table>
