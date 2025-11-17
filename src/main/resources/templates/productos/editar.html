@@ -29,7 +29,7 @@
 
                             <div class="mb-3">
                                 <label for="codigo">Código:</label>
-                                <input type="text" th:field="*{codigo}" id="codigo" class="form-control"/>
+                                <input type="text" th:field="*{codigo}" id="codigo" class="form-control" readonly/>
                                 <span th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}" class="text-danger"></span>
                             </div>
 
