@@ -75,7 +75,11 @@ public class ProductoController {
        ra.addFlashAttribute("msgExito", "Producto editado con éxito.");
       return "redirect:/productos";
    }
+
+   @PostMapping("/eliminar/{id}")
    String eliminarProducto(Model model, @PathVariable("id") Long id, RedirectAttributes ra) {
+      productoRepository.deleteById(id);
        ra.addFlashAttribute("msgExito", "Producto eliminado con éxito.");
       return "redirect:/productos";
+   }
 }
