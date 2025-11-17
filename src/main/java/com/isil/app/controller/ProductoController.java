@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/productos")
@@ -47,12 +48,13 @@ public class ProductoController {
    }
 
    @PostMapping
-   String nuevoProducto(Model model, @Valid Producto producto, BindingResult result) {
+   String nuevoProducto(Model model, @Valid Producto producto, BindingResult result, RedirectAttributes ra) {
        if (result.hasErrors()) {
            // Si hay errores, se vuelve a mostrar el formulario
            return "productos/nuevo";
        }
        productoRepository.save(producto);
+       ra.addFlashAttribute("msgExito", "Producto agregado con éxito.");
       return "redirect:/productos";
    }
 
@@ -65,11 +67,15 @@ public class ProductoController {
    }
 
    @PostMapping("/actualizar")
-   String actualizarProducto(Model model, @Valid Producto producto, BindingResult result) {
+   String actualizarProducto(Model model, @Valid Producto producto, BindingResult result, RedirectAttributes ra) {
        if (result.hasErrors()) {
            return "productos/editar";
        }
        productoRepository.save(producto);
+       ra.addFlashAttribute("msgExito", "Producto editado con éxito.");
       return "redirect:/productos";
    }
+   String eliminarProducto(Model model, @PathVariable("id") Long id, RedirectAttributes ra) {
+       ra.addFlashAttribute("msgExito", "Producto eliminado con éxito.");
+      return "redirect:/productos";
 }
